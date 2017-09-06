@@ -21,12 +21,13 @@ public class UserDao {
 	public void addUser(User user) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into users(firstname,lastname,dob,email) values (?, ?, ?, ? )");
+					.prepareStatement("insert into users(name,gender,depart,score,rank) values (?, ?, ?, ?, ?)");
 			// Parameters start with 1
-			preparedStatement.setString(1, user.getFirstName());
-			preparedStatement.setString(2, user.getLastName());
-			preparedStatement.setDate(3, new java.sql.Date(user.getDob().getTime()));
-			preparedStatement.setString(4, user.getEmail());
+			preparedStatement.setString(1, user.getName());
+			preparedStatement.setString(2, user.getGender());
+			preparedStatement.setString(3, user.getDepart());
+			preparedStatement.setInt(4, user.getScore());
+			preparedStatement.setInt(5, user.getRank());
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -37,7 +38,7 @@ public class UserDao {
 	public void deleteUser(int userId) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("delete from users where userid=?");
+					.prepareStatement("delete from users where id=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, userId);
 			preparedStatement.executeUpdate();
@@ -50,14 +51,15 @@ public class UserDao {
 	public void updateUser(User user) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("update users set firstname=?, lastname=?, dob=?, email=?" +
-							"where userid=?");
+					.prepareStatement("update users set name=?, gender=?, depart=?, score=?, rank=? " +
+							"where id=?");
 			// Parameters start with 1
-			preparedStatement.setString(1, user.getFirstName());
-			preparedStatement.setString(2, user.getLastName());
-			preparedStatement.setDate(3, new java.sql.Date(user.getDob().getTime()));
-			preparedStatement.setString(4, user.getEmail());
-			preparedStatement.setInt(5, user.getUserid());
+			preparedStatement.setString(1, user.getName());
+			preparedStatement.setString(2, user.getGender());
+			preparedStatement.setString(3, user.getDepart());
+			preparedStatement.setInt(4, user.getScore());
+			preparedStatement.setInt(5, user.getRank());
+			preparedStatement.setInt(6, user.getId());
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -72,11 +74,12 @@ public class UserDao {
 			ResultSet rs = statement.executeQuery("select * from users");
 			while (rs.next()) {
 				User user = new User();
-				user.setUserid(rs.getInt("userid"));
-				user.setFirstName(rs.getString("firstname"));
-				user.setLastName(rs.getString("lastname"));
-				user.setDob(rs.getDate("dob"));
-				user.setEmail(rs.getString("email"));
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setGender(rs.getString("gender"));
+				user.setDepart(rs.getString("depart"));
+				user.setScore(rs.getInt("score"));
+				user.setRank(rs.getInt("rank"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -90,16 +93,17 @@ public class UserDao {
 		User user = new User();
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from users where userid=?");
+					prepareStatement("select * from users where id=?");
 			preparedStatement.setInt(1, userId);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if (rs.next()) {
-				user.setUserid(rs.getInt("userid"));
-				user.setFirstName(rs.getString("firstname"));
-				user.setLastName(rs.getString("lastname"));
-				user.setDob(rs.getDate("dob"));
-				user.setEmail(rs.getString("email"));
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setGender(rs.getString("gender"));
+				user.setDepart(rs.getString("depart"));
+				user.setScore(rs.getInt("score"));
+				user.setRank(rs.getInt("rank"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -52,15 +52,17 @@ public class UserController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
-        try {
-            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
-            user.setDob(dob);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        user.setEmail(request.getParameter("email"));
+        user.setName(request.getParameter("name"));
+        user.setGender(request.getParameter("gender"));
+//        try {
+//            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
+//            user.setDob(dob);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+        user.setDepart(request.getParameter("depart"));
+        user.setScore(Integer.parseInt(request.getParameter("score")));
+        user.setRank(Integer.parseInt(request.getParameter("rank")));
         String userid = request.getParameter("userid");
         if(userid == null || userid.isEmpty())
         {
@@ -68,7 +70,7 @@ public class UserController extends HttpServlet {
         }
         else
         {
-            user.setUserid(Integer.parseInt(userid));
+            user.setId(Integer.parseInt(userid));
             dao.updateUser(user);
         }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
