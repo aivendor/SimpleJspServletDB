@@ -88,7 +88,27 @@ public class UserDao {
 
 		return users;
 	}
-	
+	public List<User> getGrilUsers() {
+		List<User> users = new ArrayList<User>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("select * from users where gender ='Ů' order by gender, rank");
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setGender(rs.getString("gender"));
+				user.setDepart(rs.getString("depart"));
+				user.setScore(rs.getInt("score"));
+				user.setRank(rs.getInt("rank"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return users;
+	}
 	public User getUserById(int userId) {
 		User user = new User();
 		try {
