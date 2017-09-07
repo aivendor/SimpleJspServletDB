@@ -7,18 +7,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Show All Users</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<title>微创乒乓社团，(づ￣ 3￣)づ</title>
 </head>
 <body>
-	<table border=1>
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">导航栏</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>挑战规则</h1>
+        <p class="lead">微创乒乓球社团</p>
+        <a class="btn btn-lg btn-primary" href="" role="button">嘻嘻，还没做好 &raquo;</a>
+      </div>
+      <div class="table-responsive">
+	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>User Id</th>
-				<th>Name</th>
-				<th>Gender</th>
-				<th>Depart</th>
-				<th>Score</th>
-				<th>Rank</th>
+				<th>用户编号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>部门</th>
+				<th>积分</th>
+				<th>排名</th>
 				<th colspan=2>Action</th>
 			</tr>
 		</thead>
@@ -32,15 +66,21 @@
 					<td><c:out value="${user.score}" /></td>
 					<td><c:out value="${user.rank}" /></td>
 					<td><a
-						href="UserController?action=edit&userId=<c:out value="${user.id}"/>">Update</a></td>
+						href="UserController?action=edit&userId=<c:out value="${user.id}"/>">更新</a></td>
 					<td><a
-						href="UserController?action=delete&userId=<c:out value="${user.id}"/>">Delete</a></td>
+						href="UserController?action=delete&userId=<c:out value="${user.id}"/>">删除</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<p>
-		<a href="UserController?action=insert">Add User</a>
+		<a href="UserController?action=insert">添加新球友</a>
 	</p>
+</div>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>

@@ -71,7 +71,7 @@ public class UserDao {
 		List<User> users = new ArrayList<User>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("select * from users");
+			ResultSet rs = statement.executeQuery("select * from users order by gender, rank");
 			while (rs.next()) {
 				User user = new User();
 				user.setId(rs.getInt("id"));

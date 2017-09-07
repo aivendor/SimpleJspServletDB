@@ -51,7 +51,9 @@ public class UserController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
+       request.setCharacterEncoding("UTF-8");
+       response.setCharacterEncoding("UTF-8");
+    	User user = new User();
         user.setName(request.getParameter("name"));
         user.setGender(request.getParameter("gender"));
 //        try {
